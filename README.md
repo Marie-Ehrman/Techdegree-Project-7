@@ -1,6 +1,10 @@
+# React Gallery App
+This App fetches data from Flickr using your API Key. Is retrieves 24 photos based on the topic you select or search. It displays the applicable photos in rows and columns.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 

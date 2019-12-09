@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import {Route} from 'react-router-dom'; 
 
 export default class Search extends Component {
   
+  //search text state that gets updated to the 
     state = {
       searchText: ''
     }
@@ -34,6 +36,7 @@ export default class Search extends Component {
                  placeholder="Search for images" />
           <button type="submit" className="search-button">search</button>
         </form>
+
       );
     }
   }

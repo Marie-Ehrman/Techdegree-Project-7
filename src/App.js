@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter,
+  Route,
+  Switch
 
 } from 'react-router-dom';
 import axios from 'axios';
@@ -14,6 +16,7 @@ import apiKey from './config';
 import PhotoList  from './Components/PhotoList';
 import Search from './Components/Search';
 import Nav from './Components/Nav';
+import NotFound from './Components/NotFound';
 
 
 class App extends Component {
@@ -27,13 +30,12 @@ class App extends Component {
   } 
 
   //Use axios to fetch Flickr data
-  //Flickr API key a0c9675ec73aedbcc9e76a7c2aeb365a
 
   componentDidMount() {
-      this.retrievePhotos('afremov');
+      this.retrievePhotos();
   }
 
-  retrievePhotos = (query) => {
+  retrievePhotos = (query = 'afremov') => {
 
       axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
@@ -49,26 +51,32 @@ class App extends Component {
 
   }
 
+  //PASS THE QUERY TAG AS THE TITLE FOR PAGE
+  //CREATE A SEARCH ROUTE
+
 render() {
 
-  console.log(this.state.photos);
   return (
     //lay out the home route page
     <BrowserRouter>
-        <div className="container">
+      <div className="container">
+        {/* <Switch> */}
           <Search onSearch={this.retrievePhotos}/>
           <Nav 
-            cubism={this.retrievePhotos} 
-            fauvism={this.retrievePhotos} 
-            surrealism={this.retrievePhotos}
-            impressionism={this.retrievePhotos}/>
+            roses={this.retrievePhotos} 
+            hydrangea={this.retrievePhotos} 
+            geranium={this.retrievePhotos}
+            tulips={this.retrievePhotos}
+            alstroemeria={this.retrievePhotos}/>
           {/* If the page is loading photos, we will render a Loading message */}
           {(this.state.loading) ? <p>Loading...</p>
           /* Every time the photo state gets updated the PhotoList will
           recieve an array of objects from the data prop*/
-          : <PhotoList data={this.state.photos} />}
-        </div>
-
+          : <PhotoList data={this.state.photos} title={this.retrievePhotos.query} />}
+            {/* <Route component={NotFound} /> */}
+        {/* </Switch> */}
+      </div>
+        
         </BrowserRouter>
     );
   }

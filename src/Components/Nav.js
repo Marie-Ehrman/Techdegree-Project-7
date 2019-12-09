@@ -8,35 +8,40 @@ import {
 
 const Nav = (props) => {
 
-
   return (
     //create main-nav link
     <nav className="main-nav">
 
         <ul>
             {/* Create 1st default link to Search and 
-            load 'cubism' photos using the retrievePhotos function from App.js */}
-              <li><NavLink to='/cubism' 
-                           onClick={() => props.cubism('cubism')}>Cubism
+            load 'roses' photos using the retrievePhotos function from App.js */}
+              <li><NavLink to='/roses' 
+                           onClick={() => props.roses('roses')}>Roses
                   </NavLink></li>
             {/* Create 2nd default link to Search and 
-            load 'fauvism' photos using the retrievePhotos function from App.js */}
-              <li><NavLink to='/fauvism' 
-                           onClick={() => props.fauvism('fauvism')}>Fauvism
+            load 'hydrangea' photos using the retrievePhotos function from App.js */}
+              <li><NavLink to='/hydrangea' 
+                           onClick={() => props.hydrangea('hydrangea')}>Hydrangea
                   </NavLink></li>
             {/* Create 3rd default link to Search and 
-            load 'surrealism' photos using the retrievePhotos function from App.js */}
-              <li><NavLink to='/surrealism'
-                           onClick={() => props.surrealism('surrealism')}>Surrealism
+            load 'geranium' photos using the retrievePhotos function from App.js */}
+              <li><NavLink to='/geranium'
+                           onClick={() => props.geranium('geranium')}>Geranium
                   </NavLink></li>
+            {/* Create 4th default link to Search and 
+            load 'tulips' photos using the retrievePhotos function from App.js */}
+              <li><NavLink to='/tulips'
+                           onClick={() => props.tulips('tulips')}>Tulips
+                  </NavLink></li>
+                  
         </ul>
 
-            {console.log(props)}
+      {/* Set up Routes for default topics */}
+          <Route path='/roses'/>
+          <Route path='/hydrangea'/>
+          <Route path='/geranium'/>
+          <Route path='/tulips'/>
 
-          <Route path='/cubism'/>
-          <Route path='/fauvism'/>
-          <Route path='/surrealism'/>
-          <Route path='/impressionism' />
 
       </nav>
   );
