@@ -12,19 +12,29 @@ const PhotoList = props => {
         photos = results.map(photo =>
             <Photo data={photo} key={photo.id}/>
         );
+            return(
+                <div className="photo-container">
+                    <h2>Images of {props.query}</h2>
+                    <ul>
+                        {photos}
+                    </ul>
+                </div>
+            );
+
     } else {
         photos = <NoPhotos />
+
+        return(
+                <div className="photo-container">
+                    <ul>
+                        {photos}
+                    </ul>
+                </div>
+            );
     }
 
 
-return(
-    <div className="photo-container">
-        <h2>{props.title} Photos</h2>
-        <ul>
-            {photos}
-        </ul>
-    </div>
-);
+
 }
 
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom'; 
+import { Redirect } from 'react-router-dom';
 
 export default class Search extends Component {
   
@@ -18,23 +18,32 @@ export default class Search extends Component {
       e.preventDefault();
       //onSearch references the value of the search input referred to in the ref prop
       this.props.onSearch(this.query.value);
+
       //reset the form field so the name query text goes away after submitted
       e.currentTarget.reset();
     }
+
     
     render() {  
+
       return (
+        
         //render a search form based on html template
         <form className="search-form" onSubmit={this.handleSubmit} >
         {/*give the search form an input element and pass necessary props*/}
           <input type="search"
-                // this props 
                  onChange={this.onSearchChange}
                  name="search"
                 //this puts a reference to an input on the search class
                  ref={(input) => {this.query = input}} 
                  placeholder="Search for images" />
           <button type="submit" className="search-button">search</button>
+
+          {(this.props.query === 'afremov') 
+            ? <Redirect exact to={ `/` } /> 
+            : <Redirect to={ `/search/${this.props.query}` }/> 
+          }
+          
         </form>
 
       );
