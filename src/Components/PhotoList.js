@@ -8,6 +8,7 @@ const PhotoList = props => {
     let photos;
     const results = props.data;
 
+    //for the length of the results list, map out each "photo's" info to the Photo component
     if(results.length > 0){
         photos = results.map(photo =>
             <Photo data={photo} key={photo.id}/>

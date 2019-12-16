@@ -52,7 +52,7 @@ class Search extends Component {
             ||this.props.title === 'geraniums'
             ||this.props.title === 'tulips')
             ? <Redirect exact to={ `/` } />
-            : <Redirect to={ `/search/${this.props.title}` }/>
+            : <Redirect exact to={ `/search/${this.props.title}` }/>
             }
             
         </form>

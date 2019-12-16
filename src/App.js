@@ -30,18 +30,18 @@ class App extends Component {
     this.state = {
       photos:[],
       loading: true,
-      title: 'afremov',
+      title: '',
     };
   } 
 
 
   //when React is mounted it will load photos with "afremov" as the default query
   componentDidMount() {
-      this.retrievePhotos('afremov');
+      this.retrievePhotos();
   }
 
   //
-  retrievePhotos = (query) => {
+  retrievePhotos = (query = 'afremov') => {
       //Use axios to fetch Flickr data
       axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
@@ -71,25 +71,30 @@ render() {
                 onSearch={ this.retrievePhotos }
                 title={ this.state.title }
             />
-            <Nav />
-            
-            <PhotoList loading={this.state.loading}
-                        title={ this.state.title }
-                        data={this.state.photos}
-
+            <Nav onFetch={ this.retrievePhotos }
             />
-
-
             
         {/* Set up Routes for default topics */}
         <Switch>
 
             {/* Render components via the Routes */}
-            <Route exact path="/" />
-            <Route path="/roses" render={ () => this.retrievePhotos('roses') }/>
-            <Route path="/hydrangeas" render={ () => this.retrievePhotos('hydrangeas')} />
-            <Route path="/geraniums" render={ () => this.retrievePhotos('geraniums')} />
-            <Route path="/tulips" render={ () => this.retrievePhotos('tulips') } />
+            <Route exact path="/" render={() => <PhotoList loading={this.state.loading}
+                        title={ "afremov" }
+                        data={this.state.photos}
+            />}/>
+            <Route path="/roses" render={ () => <PhotoList loading={this.state.loading}
+                        title={"roses"}
+                        data={this.state.photos}
+            /> }/>
+            <Route path="/hydrangeas" render={ () => <PhotoList loading={this.state.loading}
+                        title={ "hydrangeas" }
+                        data={this.state.photos} /> } />
+            <Route path="/geraniums" render={ () => <PhotoList loading={this.state.loading}
+                        title={ "geraniums" }
+                        data={this.state.photos} /> } />
+            <Route path="/tulips" render={ () => <PhotoList loading={this.state.loading}
+                        title={ "tulips" }
+                        data={this.state.photos} /> } />
             <Route path="/search/:title" />
             <Route component={NotFound} />
         </Switch>
