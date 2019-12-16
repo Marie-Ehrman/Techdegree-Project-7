@@ -65,33 +65,31 @@ render() {
     //wrap the home main container in BrowserRouter tags, listens to the root router for changes
    <BrowserRouter>
     <div className="container">
+        {/* Load the Search Bar, Nav Links and Photos */}
+
             <Search 
                 onSearch={ this.retrievePhotos }
                 title={ this.state.title }
-                loading={this.state.loading}
-                photos={this.state.photos}
             />
             <Nav />
             
+            <PhotoList loading={this.state.loading}
+                        title={ this.state.title }
+                        data={this.state.photos}
 
-        {/* Load the Home page which contains the Search, Nav links and photos */}
+            />
 
-            {/* If the page is loading photos, a Loading paragraph message will render */}
-            {(this.state.loading) ? <p>Loading...</p>
-             /* Every time the photo state gets updated the PhotoList will
-             recieve an array of objects from the data prop*/
-            : <PhotoList data={this.state.photos} query={this.state.query}/>}
 
             
         {/* Set up Routes for default topics */}
         <Switch>
 
             {/* Render components via the Routes */}
-            <Route exact path="/"/>
+            <Route exact path="/" />
             <Route path="/roses" render={ () => this.retrievePhotos('roses') }/>
-            <Route path="/hydrangeas" render={ () => this.state.hydrangeas} />
-            <Route path="/geraniums" render={ () => this.state.geraniums} />
-            <Route path="/tulips" render={ () => this.state.tulips } />
+            <Route path="/hydrangeas" render={ () => this.retrievePhotos('hydrangeas')} />
+            <Route path="/geraniums" render={ () => this.retrievePhotos('geraniums')} />
+            <Route path="/tulips" render={ () => this.retrievePhotos('tulips') } />
             <Route path="/search/:title" />
             <Route component={NotFound} />
         </Switch>

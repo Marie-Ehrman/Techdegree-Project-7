@@ -20,8 +20,13 @@ const PhotoList = props => {
                     </ul>
                 </div>
             );
-
-    } else {
+    // Every time the photo state gets updated the PhotoList will
+    //recieve an array of objects from the data prop
+    } else if (props.loading){
+    //  If the page is loading photos, a Loading paragraph message will render
+            return <p>Loading...</p>;
+    //
+    } else  {
         photos = <NoPhotos />
 
         return(
@@ -33,9 +38,6 @@ const PhotoList = props => {
             );
     }
 
-
-
 }
-
 
 export default PhotoList;

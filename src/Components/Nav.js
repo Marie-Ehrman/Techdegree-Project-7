@@ -5,7 +5,7 @@ import {
 
 
 
-const Nav = (props) => {
+const Nav = () => {
 
   
   return (
