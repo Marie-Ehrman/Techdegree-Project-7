@@ -14,7 +14,7 @@ const PhotoList = props => {
         );
             return(
                 <div className="photo-container">
-                    <h2>Images of {props.query}</h2>
+                    <h2>Images of {props.title}</h2>
                     <ul>
                         {photos}
                     </ul>

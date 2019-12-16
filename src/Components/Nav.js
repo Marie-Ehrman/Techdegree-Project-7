@@ -5,7 +5,7 @@ import {
 
 
 
-const Nav = () => {
+const Nav = (props) => {
 
   
   return (
@@ -22,7 +22,7 @@ const Nav = () => {
 
             {/* Create 1st default link to Search and 
             load 'roses' photos using the retrievePhotos function from App.js */}
-              <li><NavLink to='/roses' activeStyle={{ background: 'salmon' }}>Roses</NavLink>
+              <li><NavLink to={'/roses'} activeStyle={{ background: 'salmon' }}>Roses</NavLink>
               </li>
 
             {/* Create 2nd default link to Search and 
