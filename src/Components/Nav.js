@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Component }from 'react';
 import {
     NavLink
   } from 'react-router-dom';
 
 
 
-const Nav = () => {
+  class Nav extends Component {
 
-  
-  return (
+  render(){
+    
+    return (
     //create main-nav link
     <nav className="main-nav">
 
@@ -43,7 +44,8 @@ const Nav = () => {
 
 
       </nav>
-  );
-}
+    );
+  }
+ }
 
 export default Nav;

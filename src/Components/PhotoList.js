@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Photo from './Photo';
 import NoPhotos from './NoPhotos';
 
-const PhotoList = props => {
+class PhotoList extends Component {
     
-    let photos;
-    const results = props.data;
+    render(){
+    
+            let photos;
+            const results = this.props.data;
 
     //for the length of the results list, map out each "photo's" info to the Photo component
     if(results.length > 0){
@@ -15,7 +17,7 @@ const PhotoList = props => {
         );
             return(
                 <div className="photo-container">
-                    <h2>Images of {props.title}</h2>
+                    <h2>Images of {this.props.title}</h2>
                     <ul>
                         {photos}
                     </ul>
@@ -23,7 +25,7 @@ const PhotoList = props => {
             );
     // Every time the photo state gets updated the PhotoList will
     //recieve an array of objects from the data prop
-    } else if (props.loading){
+    } else if (this.props.loading){
     //  If the page is loading photos, a Loading paragraph message will render
             return <p>Loading...</p>;
     //
@@ -37,8 +39,9 @@ const PhotoList = props => {
                     </ul>
                 </div>
             );
-    }
+        }
 
+    }
 }
 
 export default PhotoList;

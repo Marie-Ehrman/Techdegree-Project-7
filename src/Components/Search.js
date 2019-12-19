@@ -27,8 +27,6 @@ class Search extends Component {
     
     render() {  
 
-      console.log(this.props.title);
-
       return (
         
         //render a search form based on html template
@@ -46,14 +44,14 @@ class Search extends Component {
                 <path d="M0 0h24v24H0z" fill="none"/>
               </svg>
               {/* Ternary operator to apply logic for search bar routing */}
-            {/* {(this.props.title === 'afremov'
+            {(this.props.title === 'afremov'
             ||this.props.title === 'roses'
             ||this.props.title === 'hydrangeas'
             ||this.props.title === 'geraniums'
             ||this.props.title === 'tulips')
             ? <Redirect exact to={ `/` } />
             : <Redirect to={ `/search/${this.props.title}` }/>
-            } */}
+            }
             
         </form>
 
