@@ -173,7 +173,10 @@ class App extends Component {
             <Route path="/tulips" render={ () => <PhotoList loading={ this.state.tulips.loading }
                                                            title={ this.state.tulips.title }
                                                            data={this.state.tulips.photos } /> } />
-            <Route path="/search/:title" />
+
+            <Route path="/search/:title"  render={ () => <PhotoList loading={ this.state.loading }
+                                                           title={ this.state.title }
+                                                           data={this.state.photos } /> } />
             <Route component={NotFound} />
         </Switch>
       </div>
