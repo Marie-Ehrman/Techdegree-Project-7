@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Photo from './Photo';
 import NoPhotos from './NoPhotos';
 
-class PhotoList extends Component {
+class Gallery extends Component {
     
     render(){
     
@@ -12,6 +12,7 @@ class PhotoList extends Component {
 
     //for the length of the results list, map out each "photo's" info to the Photo component
     if(results.length > 0){
+
         photos = results.map(photo =>
             <Photo data={photo} key={photo.id}/>
         );
@@ -23,13 +24,7 @@ class PhotoList extends Component {
                     </ul>
                 </div>
             );
-    // Every time the photo state gets updated the PhotoList will
-    //recieve an array of objects from the data prop
-    } else if (this.props.loading){
-    //  If the page is loading photos, a Loading paragraph message will render
-            return <p>Loading...</p>;
-    //
-    } else  {
+             } else  {
         photos = <NoPhotos />
 
         return(
@@ -44,4 +39,4 @@ class PhotoList extends Component {
     }
 }
 
-export default PhotoList;
+export default Gallery;

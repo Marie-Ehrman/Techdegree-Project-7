@@ -15,8 +15,7 @@ import './App.css';
 import apiKey from './config';
 import Search from './Components/Search';
 import Nav from './Components/Nav';
-import PhotoList from './Components/PhotoList';
-import NotFound from './Components/NotFound';
+import Gallery from './Components/Gallery';
 
 
 
@@ -34,27 +33,22 @@ class App extends Component {
       home: {
           photos:[],
           loading: true,
-          title: 'afremov'
     },
-      roses: {
+      monsteras: {
           photos:[],
           loading: true,
-          title: 'roses'
       },
       hydrangeas: {          
           photos:[],
           loading: true,
-          title: 'roses'
       },
       geraniums: {          
           photos:[],
           loading: true,
-          title: 'roses'
       },
       tulips: {          
           photos:[],
           loading: true,
-          title: 'roses'
       }
     };
   } 
@@ -66,7 +60,7 @@ class App extends Component {
           this.retrievePhotos('afremov');
         
         //individual default topic API
-        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'afremov'}&per_page=24&format=json&nojsoncallback=1`)
+        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'afremov'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let home = {...this.state.home};
                     home.photos = response.data.photos.photo;
@@ -75,16 +69,16 @@ class App extends Component {
                 this.setState({ home })
               })
 
-        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'roses'}&per_page=24&format=json&nojsoncallback=1`)
+        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'monstera'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
-                let roses = {...this.state.roses};
-                    roses.photos = response.data.photos.photo;
-                    roses.loading = false;
-                    roses.title = 'roses';
-                this.setState({ roses })
+                let monsteras = {...this.state.monsteras};
+                    monsteras.photos = response.data.photos.photo;
+                    monsteras.loading = false;
+                    monsteras.title = 'monsteras';
+                this.setState({ monsteras })
               })
 
-        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'hydrangeas'}&per_page=24&format=json&nojsoncallback=1`)
+        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'hydrangeas'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let hydrangeas = {...this.state.hydrangeas};
                 hydrangeas.photos = response.data.photos.photo;
@@ -93,7 +87,7 @@ class App extends Component {
             this.setState({ hydrangeas })
               })
 
-        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'geraniums'}&per_page=24&format=json&nojsoncallback=1`)
+        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'geraniums'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let geraniums = {...this.state.geraniums};
                     geraniums.photos = response.data.photos.photo;
@@ -101,7 +95,7 @@ class App extends Component {
                     geraniums.title = 'geraniums';
                 this.setState({ geraniums })
               })
-        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'tulips'}&per_page=24&format=json&nojsoncallback=1`)
+        axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'tulips'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let tulips = {...this.state.tulips};
                     tulips.photos = response.data.photos.photo;
@@ -114,7 +108,7 @@ class App extends Component {
   //
   retrievePhotos = (query) => {
       //Use axios to fetch Flickr data
-      axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+      axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1&safe_search=1&safe_search=1`)
       .then(response => {
           this.setState({
               photos: response.data.photos.photo,
@@ -131,53 +125,46 @@ class App extends Component {
   }
 
   render() {
-    console.log('rendering....again...')
-    console.log(this.state.roses.title);
-    console.log(this.state.tulips);
-
     return (
       //lay out the home route page
       //wrap the home main container in BrowserRouter tags, listens to the root router for changes
     <BrowserRouter>
       <div className="container">
           {/* Load the Search Bar, Nav Links and Photos */}
-
               <Search 
                   onSearch={ this.retrievePhotos }
                   title={ this.state.title }
               />
-              
+
               <Nav />
 
             
         {/* Set up Routes for default topics */}
         <Switch>
-
             {/* Render components via the Routes */}
-            <Route exact path="/" render={ () => <PhotoList loading={ this.state.home.loading }
+            <Route exact path="/" render={ () => <Gallery loading={ this.state.home.loading }
                                                            title={ this.state.home.title }
                                                            data={this.state.home.photos } /> } />
 
-            <Route path="/roses" render={ () => <PhotoList loading={ this.state.roses.loading }
-                                                           title={ this.state.roses.title }
-                                                           data={this.state.roses.photos } /> } />
+            <Route path="/monsteras" render={ () => <Gallery loading={ this.state.monsteras.loading }
+                                                           title={ this.state.monsteras.title }
+                                                           data={this.state.monsteras.photos } /> } />
 
-            <Route path="/hydrangeas" render={ () => <PhotoList loading={ this.state.hydrangeas.loading }
+            <Route path="/hydrangeas" render={ () => <Gallery loading={ this.state.hydrangeas.loading }
                                                            title={ this.state.hydrangeas.title }
                                                            data={this.state.hydrangeas.photos } /> } />
 
-            <Route path="/geraniums" render={ () => <PhotoList loading={ this.state.geraniums.loading }
+            <Route path="/geraniums" render={ () => <Gallery loading={ this.state.geraniums.loading }
                                                            title={ this.state.geraniums.title }
                                                            data={this.state.geraniums.photos } /> } />
 
-            <Route path="/tulips" render={ () => <PhotoList loading={ this.state.tulips.loading }
+            <Route path="/tulips" render={ () => <Gallery loading={ this.state.tulips.loading }
                                                            title={ this.state.tulips.title }
                                                            data={this.state.tulips.photos } /> } />
 
-            <Route path="/search/:title"  render={ () => <PhotoList loading={ this.state.loading }
+            <Route path="/search/:title"  render={ () => <Gallery loading={ this.state.loading }
                                                            title={ this.state.title }
                                                            data={this.state.photos } /> } />
-            <Route component={NotFound} />
         </Switch>
       </div>
      </BrowserRouter>

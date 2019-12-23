@@ -5,11 +5,13 @@ class Search extends Component {
   
   //search text state that gets updated to the 
     state = {
-      searchText: ''
+      searchText: '',
+      loading:this.props.loading
     }
     
     onSearchChange = e => {
-        this.setState({ searchText: e.target.value });
+        this.setState({ searchText: e.target.value,
+          loading:true });
     }
     
     //function to handle the submission of a search
@@ -19,7 +21,7 @@ class Search extends Component {
         //onSearch references the value of the search input referred to in the ref prop
         this.props.onSearch(this.query.value);
         //add the query to the browsers history
-        this.props.history.push(this.query.value)
+        this.props.history.push(this.query.value);
         //reset the form field so the name query text goes away after submitted
         e.currentTarget.reset();
     }
@@ -45,14 +47,13 @@ class Search extends Component {
               </svg>
               {/* Ternary operator to apply logic for search bar routing */}
             {(this.props.title === 'afremov'
-            ||this.props.title === 'roses'
+            ||this.props.title === 'monstera'
             ||this.props.title === 'hydrangeas'
             ||this.props.title === 'geraniums'
             ||this.props.title === 'tulips')
             ? <Redirect exact to={ `/` } />
             : <Redirect to={ `/search/${this.props.title}` }/>
             }
-            
         </form>
 
       );

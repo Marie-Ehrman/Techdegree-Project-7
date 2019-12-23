@@ -22,8 +22,8 @@ import {
               <br></br>
 
             {/* Create 1st default link to Search and 
-            load 'roses' photos using the retrievePhotos function from App.js */}
-              <li><NavLink to={'/roses'} activeStyle={{ background: 'salmon' }}>Roses</NavLink>
+            load 'Monstera' photos using the retrievePhotos function from App.js */}
+              <li><NavLink to={'/monsteras'} activeStyle={{ background: 'salmon' }}>Monsteras</NavLink>
               </li>
 
             {/* Create 2nd default link to Search and 
