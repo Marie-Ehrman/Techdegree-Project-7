@@ -59,7 +59,9 @@ class App extends Component {
         //initially mount photos to page
           this.retrievePhotos('afremov');
         
-        //individual default topic API
+    //individual default topics API requests
+
+        //home route, fetch afremov photos
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'afremov'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let home = {...this.state.home};
