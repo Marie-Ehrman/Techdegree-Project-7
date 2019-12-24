@@ -1,7 +1,9 @@
 import React from 'react';
 
+//Photo component to set the image source for each photo
 const Photo = props => {
 
+    //variable to hold props data
     const id = props.data.id;
     const server = props.data.server;
     const farm = props.data.farm;
@@ -9,6 +11,7 @@ const Photo = props => {
 
 
     return (
+    //dynamically add the props data the the image source attribute using template literals
     <li>
         <img src={`https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`} alt="" />
     </li>

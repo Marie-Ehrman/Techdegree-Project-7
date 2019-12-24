@@ -8,10 +8,10 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 
-//import files
+//Import files
 import './App.css';
 
-//import Components
+//Import Components
 import apiKey from './config';
 import Search from './Components/Search';
 import Nav from './Components/Nav';
@@ -25,7 +25,7 @@ class App extends Component {
   constructor() {
     super();
 
-    //set the state of the application
+    //set the state of the application and for default topic routes
     this.state = {
       photos:[],
       loading: true,
@@ -68,7 +68,7 @@ class App extends Component {
                     home.title = 'afremov';
                 this.setState({ home })
               })
-
+        //fetch monstera photos
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'monstera'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let monsteras = {...this.state.monsteras};
@@ -78,6 +78,7 @@ class App extends Component {
                 this.setState({ monsteras })
               })
 
+        //fetch hydrangea photos
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'hydrangeas'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let hydrangeas = {...this.state.hydrangeas};
@@ -86,7 +87,8 @@ class App extends Component {
                 hydrangeas.title = 'hydrangeas';
             this.setState({ hydrangeas })
               })
-
+       
+       //fetch geranium photos
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'geraniums'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let geraniums = {...this.state.geraniums};
@@ -95,6 +97,8 @@ class App extends Component {
                     geraniums.title = 'geraniums';
                 this.setState({ geraniums })
               })
+
+        //fetch tulip photos      
         axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${'tulips'}&per_page=24&format=json&nojsoncallback=1&safe_search=1`)
               .then( response => {
                 let tulips = {...this.state.tulips};
@@ -105,9 +109,9 @@ class App extends Component {
               })
   }
 
-  //
+  //set up function to retrieve photos for Search
   retrievePhotos = (query) => {
-      //Use axios to fetch Flickr data
+      //Use axios to fetch Flickr data and set initial state upon fetch
       axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1&safe_search=1&safe_search=1`)
       .then(response => {
           this.setState({
@@ -125,12 +129,14 @@ class App extends Component {
   }
 
   render() {
+
     return (
-      //lay out the home route page
-      //wrap the home main container in BrowserRouter tags, listens to the root router for changes
+
+    //wrap the home main container in BrowserRouter tags, listens to the root router for changes
     <BrowserRouter>
       <div className="container">
-          {/* Load the Search Bar, Nav Links and Photos */}
+
+          {/* Load the Search Bar and Nav Links on the page */}
               <Search 
                   onSearch={ this.retrievePhotos }
                   title={ this.state.title }
@@ -139,9 +145,9 @@ class App extends Component {
               <Nav />
 
             
-        {/* Set up Routes for default topics */}
+        {/* Set up Root Route and Routes for default topics in Switch*/}
         <Switch>
-            {/* Render components via the Routes */}
+            {/* Render Gallery components using the Route's state */}
             <Route exact path="/" render={ () => <Gallery loading={ this.state.home.loading }
                                                            title={ this.state.home.title }
                                                            data={this.state.home.photos } /> } />
